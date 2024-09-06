@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ProductModule } from './product/product.module';
+import { WinstonModule } from 'nest-winston';
+import { winstonConfig } from './winston-logger.config';
 
 
 @Module({
@@ -11,7 +13,7 @@ import { ProductModule } from './product/product.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'password',
+      password: '',
       database: 'nest_products_db',
       autoLoadEntities: true,
       synchronize: true,
@@ -21,6 +23,7 @@ import { ProductModule } from './product/product.module';
       host: 'localhost',
       port: 6379,
     }),
+    WinstonModule.forRoot(winstonConfig),
     ProductModule,
   ],
 })
